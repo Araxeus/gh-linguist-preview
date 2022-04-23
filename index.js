@@ -23,9 +23,9 @@ fetch(
 function start(res) {
     const languages = Object.keys(res);
 
-    const currentLanguage = document
-        .querySelector('[name="pull_request[body]"]')
-        ?.value.match(/```(.+)\n/)?.[1];
+    const currentLanguage = $('[name="pull_request[body]"]')?.value.match(
+        /```(.+)\n/
+    )?.[1];
 
     const lang = currentLanguage.toLowerCase();
 

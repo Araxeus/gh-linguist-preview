@@ -20,3 +20,10 @@ Script will change the language of **The first code block** in your **first edit
 Navigation is done via the arrow keys
 
 status updates can be viewed in devtool
+
+## Build it yourself
+requires `nodeJS`, `Yarn`
+
+run in project directory:
+* `yarn`: to install dependecies
+* `yarn build`: to build and minify, output in dist folder

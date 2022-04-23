@@ -2,7 +2,9 @@
 
 Browserscript to preview github codeblocks style
 
-Script will change the language of **The first code block** in your **first editable comment/post**
+Script **always** modify the **first** codeblock in the selected comment
+
+If not comment is currently in edit mode, script by default will pick your **first editable comment/post**
 
 (if none are found, it will do nothing)
 

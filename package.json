@@ -1,0 +1,20 @@
+{
+  "name": "gh-linguist-preview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "author": "Araxeus",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.js && clip < dist/bundle.min.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "rollup": "^2.70.2",
+    "uglify-js": "^3.15.4"
+  }
+}

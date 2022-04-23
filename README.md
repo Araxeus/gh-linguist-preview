@@ -4,14 +4,14 @@ Browserscript to preview github codeblocks style
 
 ## Installation
 
-you can save the script by creating a new bookmark, in the url put `javascript: ` then the content of dist/bundle.min.js
+you can save the script by creating a new bookmark, in the url put `javascript: ` then the content of [dist/bundle.min.js](https://github.com/Araxeus/gh-linguist-preview/blob/main/dist/bundle.min.js)
 
 ## How to run it
 
 Navigate to a page with a comment editor and then either:
 
 1. Launch the bookmarklet you created
-2. Paste the content of dist/bundle.min.js in your devtools
+2. Paste the content of [dist/bundle.min.js](https://github.com/Araxeus/gh-linguist-preview/blob/main/dist/bundle.min.js) in your devtools
 
 ## Interaction
 

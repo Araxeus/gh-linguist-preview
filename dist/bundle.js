@@ -2826,7 +2826,7 @@
 
   const $ = s => document.querySelector(s);
 
-  const scriptVersion = '1.0.3';
+  const scriptVersion = '1.0.4';
 
   const bodySelectors = [
       '[name="pull_request[body]"]',
@@ -2869,7 +2869,7 @@
       .then(res => res.blob())
       .then(blob => blob.text())
       .then(load)
-      .then(yml => setTimeout(start, 200, yml));
+      .then(yml => setTimeout(start, 400, yml));
 
   const clickPreview = () =>
       (
@@ -2897,7 +2897,8 @@
               console.log(
                   `[${index + 1}/${languages.length}]: ${currentLanguage}`
               );
-      } else if (currentLanguage === '') {
+      } 
+      if (typeof currentLanguage === 'string') {
           clickPreview();
       }
 
@@ -2941,7 +2942,7 @@
                   if (isMajor || isMinor) {
                       setTimeout(
                           alert,
-                          500,
+                          400,
                           `gh-linguist-preview has a new ${
                             isMajor ? 'major' : 'minor'
                         } version! (${remoteVersion})`

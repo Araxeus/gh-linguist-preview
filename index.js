@@ -112,7 +112,7 @@ function checkVersion() {
                 const isMajor = semver.local[0] < semver.remote[0];
                 const isMinor = semver.local[1] < semver.remote[1];
                 if(isMajor || isMinor) {
-                    alert(`gh-linguist-preview has a new ${isMajor ? 'major' : 'minor'} version! (${remoteVersion})`);
+                    setTimeout(alert, 500, `gh-linguist-preview has a new ${isMajor ? 'major' : 'minor'} version! (${remoteVersion})`);
                 }
                 console.error(
                     [

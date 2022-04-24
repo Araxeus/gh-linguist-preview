@@ -6,18 +6,37 @@ let newVersion;
 
 let [, , type] = process.argv;
 const typeMap = ['major', 'minor', 'patch'];
+if (type === 'help') {
+    const { red, yellow, green } = (await import('chalk')).default;
+    const types = {
+        patch: green('patch'),
+        minor: yellow('minor'),
+        major: red('major')
+    }
+    const helpData = [
+        `${types.patch}: Backwards-compatible Bug fixes`,
+        `${types.minor}: Backwards-compatible features`,
+        `${types.major}: Possible breaking changes`
+    ]
+    console.log(`
+    Usage:
+        $ node upgrade_version.js [${Object.values(types).join('|')}]
+            ${helpData.join('\n            ')}
+    `);
+    process.exit(0);
+}
 if (type === undefined) {
     const titleCase = str => str[0].toUpperCase() + str.slice(1);
-    const { red, yellow, green } = (await import('chalk')).default
+    const { red, yellow, green } = (await import('chalk')).default;
     const colors = [red, yellow, green];
     const sign = '⭕';
-    const { prompt } = (await import('inquirer')).default;
+    const { prompt, Separator } = (await import('inquirer')).default;
     type = (await prompt([
                 {
                     type: 'list',
                     name: 'output',
-                    message: 'What kind of upgrade would you like to do?',
-                    choices: [...typeMap.map((type, i) => `${colors[i](sign)} ${titleCase(type)} (${upgrade(oldVersion, i)})`).reverse(), `${sign} Cancel`]
+                    message: `What kind of upgrade would you like to do?`,
+                    choices: [...typeMap.map((type, i) => `${colors[i](sign)} ${titleCase(type)} (${upgrade(oldVersion, i)})`).reverse(), new Separator(), `${sign} Cancel (keep ${oldVersion})`]
                 }
      ])).output.split(' ')[1];
      if (type === 'Cancel') process.exit(0);

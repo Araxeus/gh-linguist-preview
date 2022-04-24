@@ -1,4 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
+import chalk from 'chalk';
+const { red, yellow, green } = chalk;
 
 import json from './package.json' assert { type: 'json' }; // { version as oldVersion }
 const oldVersion = json.version;
@@ -7,7 +9,6 @@ let newVersion;
 let [, , type] = process.argv;
 const typeMap = ['major', 'minor', 'patch'];
 if (type === 'help') {
-    const { red, yellow, green } = (await import('chalk')).default;
     const types = {
         patch: green('patch'),
         minor: yellow('minor'),
@@ -27,7 +28,6 @@ if (type === 'help') {
 }
 if (type === undefined) {
     const titleCase = str => str[0].toUpperCase() + str.slice(1);
-    const { red, yellow, green } = (await import('chalk')).default;
     const colors = [red, yellow, green];
     const sign = '⭕';
     const { prompt, Separator } = (await import('inquirer')).default;
@@ -71,7 +71,7 @@ function upgradeInFiles(...paths) {
 upgradeInFiles('./index.js', './package.json')
     .then(() => {
         console.log(
-            `Version was successfully upgraded from ${oldVersion} to ${newVersion} [${typeMap[index]}]`
+            `${green('success:')} Version upgraded from ${oldVersion} to ${newVersion} [${typeMap[index]}]`
         );
     })
     .catch(err => {

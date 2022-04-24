@@ -1,6 +1,8 @@
 import { load as parseYML } from 'js-yaml';
 const $ = s => document.querySelector(s);
 
+const scriptVersion = '1.0.0';
+
 const bodySelectors = [
     '[name="pull_request[body]"]',
     '[name="issue[body]"]',
@@ -90,4 +92,37 @@ function start(res) {
             replaceLanguage(languages[Math.max(index, 0)]);
         }
     };
+
+    checkVersion();
+}
+
+function checkVersion() {
+    const toSemver = str => str.split('.').map(Number);
+
+    fetch(
+        'https://raw.githubusercontent.com/Araxeus/gh-linguist-preview/main/package.json'
+    )
+        .then(res => res.json())
+        .then(({ version: remoteVersion }) => {
+            if (remoteVersion !== scriptVersion) {
+                const semver = {
+                    local: toSemver(scriptVersion),
+                    remote: toSemver(remoteVersion)
+                }
+                const isMajor = semver.local[0] < semver.remote[0];
+                const isMinor = semver.local[1] < semver.remote[1];
+                if(isMajor || isMinor) {
+                    alert(`gh-linguist-preview has a new ${isMajor ? 'major' : 'minor'} version! (${remoteVersion})`);
+                }
+                console.error(
+                    [
+                        'gh-linguist-preview needs updating!',
+                        `Current version: ${scriptVersion}`,
+                        `Latest version: ${remoteVersion}`,
+                        'Visit github to copy the latest version:',
+                        'https://github.com/Araxeus/gh-linguist-preview/blob/main/dist/bundle.min.js'
+                    ].join('\n  ')
+                );
+            }
+        });
 }

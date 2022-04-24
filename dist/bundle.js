@@ -2826,6 +2826,8 @@
 
   const $ = s => document.querySelector(s);
 
+  const scriptVersion = '1.0.0';
+
   const bodySelectors = [
       '[name="pull_request[body]"]',
       '[name="issue[body]"]',
@@ -2915,6 +2917,28 @@
               replaceLanguage(languages[Math.max(index, 0)]);
           }
       };
+
+      checkVersion();
+  }
+
+  function checkVersion() {
+      fetch(
+          'https://raw.githubusercontent.com/Araxeus/gh-linguist-preview/main/package.json'
+      )
+          .then(res => res.json())
+          .then(({ version }) => {
+              if (version !== scriptVersion) {
+                  console.error(
+                      [
+                          'gh-linguist-preview needs updating!',
+                          `Current version: ${scriptVersion}`,
+                          `Latest version: ${version}`,
+                          'Visit github to copy the latest version:',
+                          'https://github.com/Araxeus/gh-linguist-preview/blob/main/dist/bundle.min.js'
+                      ].join('\n  ')
+                  );
+              }
+          });
   }
 
 })();

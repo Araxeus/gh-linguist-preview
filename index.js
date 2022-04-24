@@ -44,7 +44,7 @@ fetch(
     .then(res => res.blob())
     .then(blob => blob.text())
     .then(parseYML)
-    .then(yml => setTimeout(start, 200, yml));
+    .then(yml => setTimeout(start, 400, yml));
 
 const clickPreview = () =>
     (
@@ -72,7 +72,8 @@ function start(res) {
             console.log(
                 `[${index + 1}/${languages.length}]: ${currentLanguage}`
             );
-    } else if (currentLanguage === '') {
+    } 
+    if (typeof currentLanguage === 'string') {
         clickPreview();
     }
 
@@ -116,7 +117,7 @@ function checkVersion() {
                 if (isMajor || isMinor) {
                     setTimeout(
                         alert,
-                        500,
+                        400,
                         `gh-linguist-preview has a new ${
                             isMajor ? 'major' : 'minor'
                         } version! (${remoteVersion})`

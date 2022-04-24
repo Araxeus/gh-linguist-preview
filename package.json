@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.js && clip < dist/bundle.min.js",
+    "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.js",
+    "clipboard": "clip < dist/bundle.min.js",
     "upgrade-version": "node upgrade_version.js"
   },
   "devDependencies": {

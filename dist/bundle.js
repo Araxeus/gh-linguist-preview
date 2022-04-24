@@ -2826,7 +2826,7 @@
 
   const $ = s => document.querySelector(s);
 
-  const scriptVersion = '1.0.2';
+  const scriptVersion = '1.0.3';
 
   const bodySelectors = [
       '[name="pull_request[body]"]',
@@ -2872,15 +2872,17 @@
       .then(yml => setTimeout(start, 200, yml));
 
   const clickPreview = () =>
-      $(
-          'div.previewable-comment-form:is(.write-selected, .preview-selected) button.preview-tab'
+      (
+          $(
+              'div.previewable-comment-form:is(.write-selected, .preview-selected) button.preview-tab'
+          ) || $('button.preview-tab')
       )?.click();
 
   function start(res) {
       const languages = Object.keys(res);
       let index = -1;
 
-      const currentLanguage = getBody()?.value.match(/```(.+)\n/)?.[1];
+      const currentLanguage = getBody()?.value.match(/```(.*)\n/)?.[1];
 
       if (currentLanguage) {
           const lang = currentLanguage.toLowerCase();
@@ -2895,7 +2897,7 @@
               console.log(
                   `[${index + 1}/${languages.length}]: ${currentLanguage}`
               );
-
+      } else if (currentLanguage === '') {
           clickPreview();
       }
 
@@ -2936,8 +2938,14 @@
                   };
                   const isMajor = semver.local[0] < semver.remote[0];
                   const isMinor = semver.local[1] < semver.remote[1];
-                  if(isMajor || isMinor) {
-                      setTimeout(alert, 500, `gh-linguist-preview has a new ${isMajor ? 'major' : 'minor'} version! (${remoteVersion})`);
+                  if (isMajor || isMinor) {
+                      setTimeout(
+                          alert,
+                          500,
+                          `gh-linguist-preview has a new ${
+                            isMajor ? 'major' : 'minor'
+                        } version! (${remoteVersion})`
+                      );
                   }
                   console.error(
                       [

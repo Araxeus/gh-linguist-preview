@@ -41,8 +41,7 @@ if (
 fetch(
     'https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml'
 )
-    .then(res => res.blob())
-    .then(blob => blob.text())
+    .then(res => res.text())
     .then(parseYML)
     .then(yml => setTimeout(start, 400, yml));
 

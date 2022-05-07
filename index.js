@@ -6,7 +6,8 @@ const scriptVersion = '1.0.4';
 const bodySelectors = [
     '[name="pull_request[body]"]',
     '[name="issue[body]"]',
-    '[name="issue_comment[body]"]'
+    '[name="issue_comment[body]"]',
+    '[name="comment[body]"]'
 ];
 
 const getNthParent = (elem, n) =>
@@ -32,7 +33,12 @@ const getBody = () => {
 const firstOwnedComment = getBody();
 if (
     !firstOwnedComment ||
-    !getNthParent(firstOwnedComment, 6).classList.contains('is-comment-editing')
+    !(
+        firstOwnedComment.id === 'new_comment_field' ||
+        getNthParent(firstOwnedComment, 6).classList.contains(
+            'is-comment-editing'
+        )
+    )
 ) {
     $('button.js-comment-edit-button')?.scrollIntoView({ block: 'center' });
     $('button.js-comment-edit-button')?.click();
@@ -71,7 +77,7 @@ function start(res) {
             console.log(
                 `[${index + 1}/${languages.length}]: ${currentLanguage}`
             );
-    } 
+    }
     if (typeof currentLanguage === 'string') {
         clickPreview();
     }

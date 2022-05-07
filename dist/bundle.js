@@ -2826,12 +2826,13 @@
 
   const $ = s => document.querySelector(s);
 
-  const scriptVersion = '1.0.4';
+  const scriptVersion = '1.0.5';
 
   const bodySelectors = [
       '[name="pull_request[body]"]',
       '[name="issue[body]"]',
-      '[name="issue_comment[body]"]'
+      '[name="issue_comment[body]"]',
+      '[name="comment[body]"]'
   ];
 
   const getNthParent = (elem, n) =>
@@ -2857,7 +2858,12 @@
   const firstOwnedComment = getBody();
   if (
       !firstOwnedComment ||
-      !getNthParent(firstOwnedComment, 6).classList.contains('is-comment-editing')
+      !(
+          firstOwnedComment.id === 'new_comment_field' ||
+          getNthParent(firstOwnedComment, 6).classList.contains(
+              'is-comment-editing'
+          )
+      )
   ) {
       $('button.js-comment-edit-button')?.scrollIntoView({ block: 'center' });
       $('button.js-comment-edit-button')?.click();
@@ -2866,8 +2872,7 @@
   fetch(
       'https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml'
   )
-      .then(res => res.blob())
-      .then(blob => blob.text())
+      .then(res => res.text())
       .then(load)
       .then(yml => setTimeout(start, 400, yml));
 
@@ -2897,7 +2902,7 @@
               console.log(
                   `[${index + 1}/${languages.length}]: ${currentLanguage}`
               );
-      } 
+      }
       if (typeof currentLanguage === 'string') {
           clickPreview();
       }

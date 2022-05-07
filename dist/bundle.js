@@ -2826,7 +2826,7 @@
 
   const $ = s => document.querySelector(s);
 
-  const scriptVersion = '1.0.5';
+  const scriptVersion = '1.0.6';
 
   const bodySelectors = [
       '[name="pull_request[body]"]',
@@ -2915,13 +2915,13 @@
           console.log(`[${index + 1}/${languages.length}]: ${replacement}`);
       }
 
-      document.onkeyup = e => {
+      document.onkeydown = e => {
           //if (!e.ctrlKey) return;
           if (e.key === 'ArrowRight') {
-              index += index < languages.length - 1 ? 1 : 0;
+              index = index < languages.length - 1 ? index + 1 : 0;
               replaceLanguage(languages[index]);
           } else if (e.key === 'ArrowLeft') {
-              index -= index > 0 ? 1 : 0;
+              index = index > 0 ? index - 1 : languages.length - 1;
               replaceLanguage(languages[Math.max(index, 0)]);
           }
       };

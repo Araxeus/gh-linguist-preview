@@ -90,7 +90,7 @@ function start(res) {
         console.log(`[${index + 1}/${languages.length}]: ${replacement}`);
     }
 
-    document.onkeyup = e => {
+    document.onkeydown = e => {
         //if (!e.ctrlKey) return;
         if (e.key === 'ArrowRight') {
             index = index < languages.length - 1 ? index + 1 : 0;

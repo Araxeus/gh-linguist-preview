@@ -1,7 +1,7 @@
 import { load as parseYML } from 'js-yaml';
 const $ = (s) => document.querySelector(s);
 
-const scriptVersion = '1.0.6';
+const scriptVersion = '1.0.7';
 
 // const bodySelectors = [
 // 	'[name="pull_request[body]"]',

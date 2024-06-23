@@ -10,6 +10,8 @@
   },
   "scripts": {
     "start": "bun run build && bun clipboard",
+    "check": "biome check",
+    "lint": "biome check --write",
     "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.uglify.js",
     "clipboard": "clip < dist/bundle.min.js",
     "upgrade-version": "bun upgrade_version.js",

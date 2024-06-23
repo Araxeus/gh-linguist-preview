@@ -2908,22 +2908,22 @@
   		console.log(`[${index + 1}/${languages.length}]: ${replacement}`);
   	});
 
-      const updateIndex = () => {
+  	const updateIndex = () => {
   		const currentLang = getCurrentLanguage();
   		if (currentLang && currentLang !== languages[index]) {
   			possibleIndex = getLanguageIndex(currentLang.toLowerCase());
   			if (possibleIndex >= 0) index = possibleIndex;
   		}
-      };
+  	};
 
   	document.onkeydown = (e) => {
   		if (!e.ctrlKey) return;
   		if (e.key === "ArrowUp") {
-              updateIndex();
+  			updateIndex();
   			index = index < languages.length - 1 ? index + 1 : 0;
   			replaceLanguage(languages[index]);
   		} else if (e.key === "ArrowDown") {
-              updateIndex();
+  			updateIndex();
   			index = index > 0 ? index - 1 : languages.length - 1;
   			replaceLanguage(languages[Math.max(index, 0)]);
   		}

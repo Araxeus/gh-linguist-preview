@@ -10,16 +10,17 @@
   },
   "scripts": {
     "start": "bun run build && bun clipboard",
-    "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.js",
+    "build": "rollup -c && uglifyjs dist/bundle.js -c -m -o dist/bundle.min.uglify.js",
     "clipboard": "clip < dist/bundle.min.js",
     "upgrade-version": "bun upgrade_version.js",
     "get:tag": "x-var echo v$npm_package_version"
   },
   "devDependencies": {
-    "x-var": "^2.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "inquirer": "^9.2.23",
     "rollup": "^4.18.0",
-    "uglify-js": "^3.18.0"
+    "uglify-js": "^3.18.0",
+    "x-var": "^2.0.1"
   }
 }

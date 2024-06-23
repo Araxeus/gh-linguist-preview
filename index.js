@@ -3,12 +3,12 @@ const $ = (s) => document.querySelector(s);
 
 const scriptVersion = "1.0.6";
 
-const bodySelectors = [
-	'[name="pull_request[body]"]',
-	'[name="issue[body]"]',
-	'[name="issue_comment[body]"]',
-	'[name="comment[body]"]',
-];
+// const bodySelectors = [
+// 	'[name="pull_request[body]"]',
+// 	'[name="issue[body]"]',
+// 	'[name="issue_comment[body]"]',
+// 	'[name="comment[body]"]',
+// ];
 
 const getNthParent = (elem, n) =>
 	n === 0 ? elem : getNthParent(elem.parentNode, n - 1);

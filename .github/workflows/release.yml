@@ -27,10 +27,16 @@ jobs:
       - name: build
         run: yarn build
 
+      - name: get tag name
+        id: get_tag_name
+        run: |
+          echo "{TAG_NAME}={v$(npm pkg get version)}" >> $GITHUB_ENV
+
       - name: commit and push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add index.js package.json dist
           git commit -m "[github-actions] release $(npm pkg get version)"
+          git tag -a ${{ env.TAG_NAME }} -m "Release ${{ env.TAG_NAME }}"
           git push

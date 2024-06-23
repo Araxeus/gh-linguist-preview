@@ -28,8 +28,8 @@ The script is automatically build by github actions, and includes an update chec
 
 if you still want to:
 
-isntall `nodeJS` and `Yarn`
+install `Bun`
 
 run in project directory:
-* `yarn`: to install dependecies
-* `yarn build`: to build and minify, output in dist folder
+* `bun install`: to install dependecies
+* `bun run build`: to build and minify, output in dist folder

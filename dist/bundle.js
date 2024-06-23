@@ -2826,7 +2826,7 @@
 
   const $ = (s) => document.querySelector(s);
 
-  const scriptVersion = '1.0.7';
+  const scriptVersion = '1.1.0';
 
   // const bodySelectors = [
   // 	'[name="pull_request[body]"]',
